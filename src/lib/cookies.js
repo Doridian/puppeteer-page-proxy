@@ -64,12 +64,14 @@ const formatCookie = (cookie) => {
 class CookieHandler extends CDP {
     constructor(request) {
         super(request._client);
-        this.url = request.url();
         if (request.isNavigationRequest()) {
             const frame = request.frame();
             if (frame) {
                 this.url = frame.url();
             }
+        }
+        if (!this.url) {
+            this.url = request.url();
         }
         this.domain = new URL(this.url).hostname;
     }
