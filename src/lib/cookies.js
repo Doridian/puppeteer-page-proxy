@@ -70,7 +70,7 @@ class CookieHandler extends CDP {
                 this.url = frame.url();
             }
         }
-        if (!this.url) {
+        if (!this.url || !this.url.startsWith('http')) {
             this.url = request.url();
         }
         this.domain = new URL(this.url).hostname;
